@@ -1,0 +1,32 @@
+body {
+	padding: 40px 50px;
+}
+
+img.logo{
+	width: 180px;
+    height: 104px;
+    margin-bottom: 25px;
+}
+
+@Media ( max-width : 980px) {
+	
+	body {
+		padding: 40px 10px;
+	}
+	
+	h1 {
+		font-size: 3rem;
+	}
+}
+
+
+@Media ( max-width : 768px) {
+	
+	body {
+		padding: 40px 10px;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+	}
+}
