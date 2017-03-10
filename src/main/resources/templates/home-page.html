@@ -1,35 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<title>Cadastro de Usuário</title>
+	xmlns:th="http://www.thymeleaf.org">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/cadastro-dti.css}"/>
+<head>
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Cadastro de Usuário</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"	th:href="@{/stylesheets/cadastro-dti.css}" />
+
 </head>
 <body>
+
 	<div class="container-fluid">
-		<header>
-			<h1>Cadastro de Novo Usuário da DTI</h1>
-		</header>
-			<form >
-				<div class="row">
-					<div class="col-xs-12">
-						<label class="control-label" for="nome">Nome</label>
-						<input class="form-control" id="nome" type="text" />
+
+		<div class="row">
+			<img class="img-responsive col-xs-12 col-sm-4 logo" alt="Brand" th:src="@{/images/logo.png}"/>
+			<h1 class="col-xs-12 col-sm-8">Cadastro de Novo Usuário da DTI</h1>
+		</div>
+	
+
+		<form>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="form-group">
+						<label class="control-label" for="nomeCompleto">Nome Completo</label>
+						 <input class="form-control" id="nomeCompleto" type="text" />
 					</div>
 				</div>
-			</form>
+				<div class="col-xs-12 col-sm-4">
+					<div class="form-group">
+						<label class="control-label" for="nomeGuerra">Nome de Guerra</label>
+						<input class="form-control" id="nomeGuerra" type="text" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="form-group">
+						<label class="control-label" for="escalao">Escalão/Divisão/Seção</label>
+						<input class="form-control" id="escalao" type="text" />
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div class="form-group">
+						<label class="control-label" for="postoGrad">Posto / Graduação</label>
+						 <select class="form-control" id="postoGrad">
+						 <option value="">Selecione...</option>
+						 <option value="1">Cel</option>
+						 <option value="2">Ten Cel</option>
+						 </select>
+						 
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<span>Selecione o tipo de serviço desejado:</span>
+				
+				<input type="checkbox" /><span>Rede</span>
+				<input type="checkbox" /><span>Internet</span>
+				<input type="checkbox" /><span>SPED</span>
+				<input type="checkbox" /><span>SISBOL</span>
+				
+			</div>
+			
+			<button type="button" class="btn btn-primary">Enviar</button>
+		
+		</form>
+
 	</div>
-	
-<script th:src="@{/javascripts/vendors/jquery-3.1.1.min.js}"></script>
-<script th:src="@{/javascripts/vendors/bootstrap.min.js}"></script>
-<script th:src="@{/javascripts/cadastro-dti.js}"></script>
-<th:block layout:fragment="javascript-extra"></th:block>
+
+	<script th:src="@{/javascripts/vendors/jquery-3.1.1.min.js}"></script>
+	<script th:src="@{/javascripts/vendors/bootstrap.min.js}"></script>
+	<script th:src="@{/javascripts/cadastro-dti.js}"></script>
+
 </body>
 </html>
