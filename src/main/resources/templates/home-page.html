@@ -1,88 +1,99 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 
-<head>
+	<head>
+	
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<title>Cadastro de Usuário</title>
+	
+		<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css"	th:href="@{/stylesheets/cadastro-dti.css}" />
+	
+	</head>
 
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<title>Cadastro de Usuário</title>
-
-<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css"	th:href="@{/stylesheets/cadastro-dti.css}" />
-
-</head>
-
-<body>
-
-	<div class="container-fluid">
-
-		<div class="row">
-			<img class="img-responsive col-xs-12 col-sm-4 logo" alt="Brand" th:src="@{/images/logo.png}"/>
-			<h1 class="col-xs-12 col-sm-8">Cadastro de Novo Usuário da DTI</h1>
+	<body>
+	
+		<div class="container-fluid">
+	
+			<div class="row">
+				<img class="img-responsive col-xs-12 col-sm-4 logo" alt="Brand" th:src="@{/images/logo.png}"/>
+				<h1 class="col-xs-12 col-sm-8">Cadastro de Novo Usuário da DTI</h1>
+			</div>
+		
+	
+			<form>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<div class="form-group">
+							<label class="control-label" for="postoGrad">Posto / Graduação</label>
+							<select class="form-control" id="postoGrad">
+								<option value="">Selecione...</option>
+								<option value="1">Cel</option>
+								<option value="2">Ten Cel</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<div class="form-group">
+							<label class="control-label" for="nomeGuerra">Nome de Guerra</label>
+							<input class="form-control" id="nomeGuerra" type="text" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<div class="form-group">
+							<label class="control-label" for="nomeCompleto">Nome Completo</label>
+							<input class="form-control" id="nomeCompleto" type="text" />
+	
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-8">
+						<div class="form-group">
+							<label class="control-label" for="escalao">Escalão/Divisão/Seção</label>
+							<input class="form-control" id="escalao" type="text" />
+						</div>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="form-group  col-sm-12">
+						<label class="control-label">Selecione o tipo de serviço desejado:</label>
+						<div class="selecao-tipo-servico">
+							<label>
+								<input type="checkbox" />Rede
+							</label>
+							<label>
+								<input type="checkbox" />SPED
+							</label>
+							<label for="sisbol" >
+								<input id="sisbol" type="checkbox" /> SISBOL
+							</label>
+	                        <label for="internet" >
+								<input id="internet" type="checkbox" />Internet
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<button type="button" class="btn btn-primary">Enviar</button>
+			
+			</form>
 		</div>
 	
-
-		<form>
-			
-			<div class="row">
-				<div class="col-xs-12 col-sm-8">
-					<div class="form-group">
-						<label class="control-label" for="nomeCompleto">Nome Completo</label>
-						 <input class="form-control" id="nomeCompleto" type="text" />
-
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-4">
-					<div class="form-group">
-						<label class="control-label" for="nomeGuerra">Nome de Guerra</label>
-						<input class="form-control" id="nomeGuerra" type="text" />
-					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-xs-12 col-sm-8">
-					<div class="form-group">
-						<label class="control-label" for="escalao">Escalão/Divisão/Seção</label>
-						<input class="form-control" id="escalao" type="text" />
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-4">
-					<div class="form-group">
-						<label class="control-label" for="postoGrad">Posto / Graduação</label>
-						 <select class="form-control" id="postoGrad">
-						 <option value="">Selecione...</option>
-						 <option value="1">Cel</option>
-						 <option value="2">Ten Cel</option>
-						 </select>
-						 
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<span>Selecione o tipo de serviço desejado:</span>
-				
-				<input type="checkbox" /><span>Rede</span>
-				<input type="checkbox" /><span>Internet</span>
-				<input type="checkbox" /><span>SPED</span>
-				<input type="checkbox" /><span>SISBOL</span>
-				
-			</div>
-			
-			<button type="button" class="btn btn-primary">Enviar</button>
-		
-		</form>
-	</div>
-
-	<script th:src="@{/javascripts/vendors/jquery-3.1.1.min.js}"></script>
-	<script th:src="@{/javascripts/vendors/bootstrap.min.js}"></script>
-	<script th:src="@{/javascripts/cadastro-dti.js}"></script>
-
-</body>
+		<script th:src="@{/javascripts/vendors/jquery-3.1.1.min.js}"></script>
+		<script th:src="@{/javascripts/vendors/bootstrap.min.js}"></script>
+		<script th:src="@{/javascripts/cadastro-dti.js}"></script>
+	
+	</body>
 </html>

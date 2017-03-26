@@ -30,3 +30,8 @@ img.logo{
 		font-size: 2.5rem;
 	}
 }
+
+
+.selecao-tipo-servico label{
+	margin-right: 20px;
+}
