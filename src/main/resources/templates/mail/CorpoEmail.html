@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body style="font-family: Arial; font-size: 14px;">
+	
+	<p style="text-align: right">
+		<img src="../../static/images/logo.png" th:src="@{logo.png}"/>
+	</p>
+
+	<h1 style="font-size: 22px" th:text="|Novo Cadastro de Usuário: ${usuarioNovo.postoGrad.descricao} ${usuarioNovo.nome}|">Usuario</h1>
+	
+	<p>
+		Dados do usuário:
+	</p>
+	<p>
+	Posto / Graduação: <span th:text="${usuarioNovo.postoGrad.descricao}"></span>
+	</p>
+	<p>
+	Nome de Guerra: <span th:text="${usuarioNovo.nomeGuerra}"></span>
+	</p>
+	<p>
+	Nome Completo: <span th:text="${usuarioNovo.nome}"></span>
+	</p>
+	<p>
+	Escalão / Seção / Divisão: <span th:text="${usuarioNovo.escalao}"></span>
+	</p>
+	<p>
+	Senha: <span th:text="${usuarioNovo.senha}"></span>
+	</p>
+	
+	<p>
+	Serviços solicitados
+	</p>
+	
+	<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+		<th:block th:each="servico : ${usuarioNovo.servicos}">
+			<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
+				
+				<td style="vertical-align: top; text-align: left; padding-bottom: 10px; padding-top: 10px">
+					<span style="display: block; font-weight: bold; font-size: 16px" th:text="${servico}">REDE</span>
+				</td>
+			</tr>
+						
+		</th:block>
+	</table>
+	
+	
+	<p>Sistema de Cadastro - DTI - 2017</p>
+</body>
+</html>
