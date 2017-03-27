@@ -22,6 +22,7 @@ public class HomeController {
 	private CadastroUsuarioNovoService cadastroUsuarioNovoService;
 	
 	
+	
 	@RequestMapping("/")
 	public ModelAndView inicio(UsuarioNovo usuarioNovo){
 		ModelAndView mv = new ModelAndView("home-page");
@@ -37,16 +38,15 @@ public class HomeController {
 	public ModelAndView salvar(@Valid UsuarioNovo usuarioNovo, BindingResult result, RedirectAttributes attributes){
 		if (result.hasErrors()) {
 			
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>DEU ERRO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			return inicio(usuarioNovo);
 		}
 		
 		cadastroUsuarioNovoService.salvar(usuarioNovo);
 		
-		attributes.addFlashAttribute("mensagem", "Usuario salvo com sucesso!");
 		
-//		attributes.addFlashAttribute("mensagem", String.format( "Usuario Novo: %s %s salvo com sucesso",
-//				usuarioNovo.getPostoGrad(), usuarioNovo.getNomeGuerra()));
+		
+		attributes.addFlashAttribute("mensagem", String.format( "Usuário - %s %s - salvo com sucesso!",
+				usuarioNovo.getPostoGrad().getDescricao(), usuarioNovo.getNomeGuerra()));
 		
 		
 		return new ModelAndView("redirect:/");	

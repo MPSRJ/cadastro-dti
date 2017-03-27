@@ -4,7 +4,7 @@ public enum Servico {
 	
 	REDE("Rede"),
 	SPED("SPED"),
-	SISBOL("SisBol"),
+	SISBOL("SISBOL"),
 	INTERNET("Internet");
 	
 	private String descricao;
@@ -12,10 +12,9 @@ public enum Servico {
 	Servico(String descricao){
 		this.descricao = descricao;
 	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
 
-	
 }

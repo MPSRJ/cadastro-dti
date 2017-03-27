@@ -1,4 +1,4 @@
-package br.mil.eb.caddti.tymeleaf.processor;
+package br.mil.eb.caddti.thymeleaf.processor;
 
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.engine.AttributeName;

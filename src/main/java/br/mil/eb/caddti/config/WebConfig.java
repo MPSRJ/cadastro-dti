@@ -3,94 +3,86 @@ package br.mil.eb.caddti.config;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
+import javax.sql.DataSource;
+
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
-import org.springframework.format.support.DefaultFormattingConversionService;
-import org.springframework.format.support.FormattingConversionService;
+import org.springframework.format.number.NumberStyleFormatter;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
 
-import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
-
-import br.mil.eb.caddti.config.format.BigDecimalFormatter;
-import br.mil.eb.caddti.tymeleaf.MpsDialect;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
+import br.mil.eb.caddti.thymeleaf.AppDialect;
 
 @Configuration
 @EnableSpringDataWebSupport
+@EnableCaching
+@EnableAsync
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-	private ApplicationContext applicationContext;
-	
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
-	
 	@Bean
-	public ViewResolver viewResolver() {
-		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-		resolver.setTemplateEngine(templateEngine());
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setOrder(1);
-		return resolver;
-	}
-
-	@Bean
-	public TemplateEngine templateEngine() {
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.setEnableSpringELCompiler(true);
-		engine.setTemplateResolver(templateResolver());
-		
-		engine.addDialect(new LayoutDialect());
-		engine.addDialect(new MpsDialect());
-		engine.addDialect(new DataAttributeDialect());
-		return engine;
-	}
-
-	private ITemplateResolver templateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setApplicationContext(applicationContext);
-		resolver.setPrefix("classpath:/templates/");
-		resolver.setSuffix(".html");
-		resolver.setTemplateMode(TemplateMode.HTML);
+	public ViewResolver jasperReportsViewResolver(DataSource datasource) {
+		JasperReportsViewResolver resolver = new JasperReportsViewResolver();
+		resolver.setPrefix("classpath:/relatorios/");
+		resolver.setSuffix(".jasper");
+		resolver.setViewNames("relatorio_*");
+		resolver.setViewClass(JasperReportsMultiFormatView.class);
+		resolver.setJdbcDataSource(datasource);
+		resolver.setOrder(0);
 		return resolver;
 	}
 	
+	@Bean
+	public AppDialect appDialect() {
+		return new AppDialect();
+	}
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	}
 	
-	@Bean
-	public FormattingConversionService mvcConversionService() {
-		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
+		registry.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
 		
-		BigDecimalFormatter bigDecimalFormatter = new BigDecimalFormatter("#,##0.00");
-		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
-		
-		BigDecimalFormatter integerFormatter = new BigDecimalFormatter("#,##0");
-		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
-		
-		// API de Datas do Java 8
 		DateTimeFormatterRegistrar dateTimeFormatter = new DateTimeFormatterRegistrar();
 		dateTimeFormatter.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		dateTimeFormatter.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm"));
-		dateTimeFormatter.registerFormatters(conversionService);
-		
-		return conversionService;
+		dateTimeFormatter.registerFormatters(registry);
 	}
 	
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
+		bundle.setBasename("classpath:/messages");
+		bundle.setDefaultEncoding("UTF-8"); // http://www.utf8-chartable.de/
+		return bundle;
+	}
 	
+	@Bean
+	public LocalValidatorFactoryBean validator() {
+	    LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+	    validatorFactoryBean.setValidationMessageSource(messageSource());
+	    
+	    return validatorFactoryBean;
+	}
+
+	@Override
+	public Validator getValidator() {
+		return validator();
+	}
 	
 }

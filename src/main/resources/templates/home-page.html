@@ -2,7 +2,7 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:mps="http://caddti.eb.mil.br">
+	xmlns:app="http://caddti.eb.mil.br">
 
 
 <head>
@@ -13,10 +13,11 @@
 
 <title>Cadastro de Usuário</title>
 
-<link rel="stylesheet" type="text/css"
-	th:href="@{/stylesheets/vendors/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/stylesheets/cadastro-dti.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/cadastro-dti.css}" />
+
+<link rel="shortcut icon" th:href="@{/images/logo.png}"/>
 
 </head>
 
@@ -32,7 +33,7 @@
 		<form method="POST" th:object="${usuarioNovo}"
 			th:action="@{/usuarionovo}">
 			
-			<mps:message />
+			<app:message />
 
 			<input type="hidden" th:field="*{codigo}" />
 			<div class="row">
@@ -85,7 +86,7 @@
 						<th:block th:each="servico : ${servicos}">
 							<div class="form-group col-xs-12 col-sm-2">
 								<label th:for="${servico}" class="control-label"> <input
-									th:id="${servico}" type="checkbox" th:field="*{servico}"
+									th:id="${servico}" type="checkbox" th:field="*{servicos}"
 									th:value="${servico}" /><span th:text="${servico.descricao}"></span>
 								</label>
 							</div>

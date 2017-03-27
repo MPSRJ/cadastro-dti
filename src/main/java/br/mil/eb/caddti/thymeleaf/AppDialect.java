@@ -1,4 +1,4 @@
-package br.mil.eb.caddti.tymeleaf;
+package br.mil.eb.caddti.thymeleaf;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,16 +7,16 @@ import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.StandardDialect;
 
-import br.mil.eb.caddti.tymeleaf.processor.ClassForErrorAttributeTagProcessor;
-import br.mil.eb.caddti.tymeleaf.processor.MenuAttributeTagProcessor;
-import br.mil.eb.caddti.tymeleaf.processor.MessageElementTagProcessor;
-import br.mil.eb.caddti.tymeleaf.processor.OrderElementTagProcessor;
-import br.mil.eb.caddti.tymeleaf.processor.PaginationElementTagProcessor;
+import br.mil.eb.caddti.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
+import br.mil.eb.caddti.thymeleaf.processor.MenuAttributeTagProcessor;
+import br.mil.eb.caddti.thymeleaf.processor.MessageElementTagProcessor;
+import br.mil.eb.caddti.thymeleaf.processor.OrderElementTagProcessor;
+import br.mil.eb.caddti.thymeleaf.processor.PaginationElementTagProcessor;
 
-public class MpsDialect extends AbstractProcessorDialect {
+public class AppDialect extends AbstractProcessorDialect {
 
-	public MpsDialect() {
-		super("http://caddti.eb.mil.br", "mps", StandardDialect.PROCESSOR_PRECEDENCE);
+	public AppDialect() {
+		super("APP", "app", StandardDialect.PROCESSOR_PRECEDENCE);
 	}
 	
 	@Override

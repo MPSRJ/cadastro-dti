@@ -1,16 +1,23 @@
 package br.mil.eb.caddti.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -26,24 +33,28 @@ public class UsuarioNovo implements Serializable {
 	
 	@Column(name="posto_grad")
 	@Enumerated(EnumType.STRING)
-	@NotNull(message="Posto/Grad não pode ser nulo")
+	@NotNull(message="Escolha um Posto/Grad!")
 	private PostoGrad postoGrad;
 	
 	@Column(name="nome_guerra")
-	@NotBlank(message="Nome de Guerra não pode estar em branco")
+	@NotBlank(message="Nome de Guerra não pode estar em branco!")
 	private String nomeGuerra;
-	@NotBlank(message="Nome não pode estar em branco")
+	@NotBlank(message="Nome não pode estar em branco!")
 	private String nome;
-	@NotBlank(message="Escalão não pode estar em branco")
+	@NotBlank(message="Escalão não pode estar em branco!")
 	private String escalao;
-	@NotBlank(message="Senha não pode estar em branco.")
+	@NotBlank(message="Senha não pode estar em branco!")
 	private String senha;
 	
 	@Transient
 	private String confirmacaoSenha;
 	
-	@Enumerated(EnumType.STRING)
-	private Servico servico;
+	@Size(min = 1, message = "Selecione pelo menos um serviço!")
+	@ElementCollection(targetClass = String.class)
+	@JoinTable(name = "usuario_servico", uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "usuario", "servico" }) }, joinColumns = @JoinColumn(name = "usuario"))
+	@Column(name = "servico", length = 50)
+	private Set<String> servicos = new HashSet<>();
 
 	public Long getCodigo() {
 		return codigo;
@@ -85,14 +96,15 @@ public class UsuarioNovo implements Serializable {
 		this.escalao = escalao;
 	}
 
-	public Servico getServico() {
-		return servico;
+
+	public Set<String> getServicos() {
+		return servicos;
 	}
 
-	public void setServico(Servico servico) {
-		this.servico = servico;
+	public void setServicos(Set<String> servicos) {
+		this.servicos = servicos;
 	}
-	
+
 	public String getSenha() {
 		return senha;
 	}
