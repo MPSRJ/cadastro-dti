@@ -21,6 +21,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.mil.eb.caddti.validation.AtributoConfirmacao;
+
+@AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha"
+, message = "Confirmação da senha não confere")
 @Entity
 @Table(name="usuario_novo")
 public class UsuarioNovo implements Serializable {

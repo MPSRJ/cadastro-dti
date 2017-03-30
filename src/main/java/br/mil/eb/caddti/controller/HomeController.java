@@ -45,6 +45,8 @@ public class HomeController {
 			return inicio(usuarioNovo);
 		}
 		
+		
+		
 		cadastroUsuarioNovoService.salvar(usuarioNovo);
 		
 		mailer.enviar(usuarioNovo);

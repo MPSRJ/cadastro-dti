@@ -14,6 +14,10 @@ public class CadastroUsuarioNovoService {
 	
 	// @Transactional
 	public void salvar(UsuarioNovo usuarioNovo){
+		
+		usuarioNovo.getNome().toUpperCase();
+		usuarioNovo.getNomeGuerra().toUpperCase();
+		
 		usuaiosNovos.save(usuarioNovo);
 		
 	}
