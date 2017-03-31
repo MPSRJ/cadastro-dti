@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:brewer="http://brewer.algaworks.com">
+	
+<body>
+<aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
+	<div class="aw-layout-sidebar__content">
+
+    	<nav class="aw-menu  js-menu">
+      		<ul class="aw-menu__list">
+
+        		<li class="aw-menu__item" brewer:menu="@{/}">
+          			<a th:href="@{/}"><i class="glyphicon glyphicon-home"></i><span>Home</span></a>
+        		</li>
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="glyphicon glyphicon-file"></i><span>Partes</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/partes.+}">
+			            	<a th:href="@{/partes/nova}">Cadastro parte</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/partes}">
+			            	<a th:href="@{/partes}">Pesquisa de partes</a>
+			            </li>
+			        </ul>
+			    </li>
+        		
+      		</ul>
+    	</nav>
+	</div>
+</aside>
+</body>
+</html>

@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/cadastro-dti.css}" />
 
-<link rel="shortcut icon" th:href="@{/images/logo.png}"/>
+<link rel="shortcut icon" th:href="@{/layout/images/favicon.png}"/>
 
 </head>
 
@@ -26,8 +26,8 @@
 	<div class="container-fluid">
 
 		<div class="row">
-			<img class="img-responsive col-xs-12 col-sm-4 logo" alt="Brand"
-				th:src="@{/images/logo.png}" />
+			<img class="img-responsive col-xs-12 col-sm-4 logo" alt="Logo"
+				th:src="@{/layout/images/logo.png}" />
 			<h1 class="col-xs-12 col-sm-8">Cadastro de Novo Usuário da DTI</h1>
 		</div>
 		<form method="POST" th:object="${usuarioNovo}"
